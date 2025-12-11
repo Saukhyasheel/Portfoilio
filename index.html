@@ -18,26 +18,10 @@
 <body>
   <div id="header">
     <div class="container">
-      <!-- <nav>
      
-        <img src="images\Rish Official-Dark.svg" alt="" class="logo">
-        <aside id="sidebar" class="sidebar">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
-          <div class="res">
-          <i class="fas fa-times" style="color: blue;"></i></div>
-        </ul>
-      </aside>
-      <div class="res">
-        <i class="fas fa-bars"  style="color: blue;"></i>
-      </div>
-      </nav> -->
       <nav>
         <img src="images/Saukhya (3).png" class="logo" alt="Logo" />
-        <i class="fas fa-bars menu-toggle"></i> <!-- Hamburger icon -->
+        <i class="fas fa-bars menu-toggle"></i> 
       
         <ul class="nav-links">
           <li><a href="#header">Home</a></li>
@@ -49,7 +33,7 @@
       </nav>
       
       <div class="header-text">
-        <!-- <p>Software Developer</p> -->
+       
         <p>Hi, I'm Saukhya and I am a </p>
         <span id="element"></span>
        
@@ -60,112 +44,290 @@
     
   </div> 
   <a href="Saukhyasheel-Sardesai-CV.pdf" download class="btn btn2" style="text-align: left; display: flex; align-content: flex-start;">Download CV</a>
-  <!-- About -->
+ 
   <div id="about">
     <div class="container">
         <div class="row">
             <div class="about1">
                 <img src="images/WhatsApp Image 2025-02-25 at 12.55.01.jpeg" alt="Profile Image">
             </div>
-            <div class="about2">
-                <h1 class="sub-title2" >About Me</h1>
-                <p>
-                    I am Saukhyasheel Sardesai, a software developer specializing in .NET, C#, AngularJS, SQL, Python, JavaScript, Data analysis, and AI.
-                </p>
-                <div class="tab-titles">
-                  <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                  <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                  <p class="tab-links" onclick="opentab('education')">Education</p>
-                </div>
-                <div class="tab-contents active-tab" id="skills">
-                  <ul>
-                    <li><span>Frontend Development</span><br>Designing Web/App interfaces</li>
-                    <li><span>Backend Development</span><br>Designing WebAPI's, Managing Database activities</li>
-                    <li><span>Data Engineering</span><br>Data Analysis/Data Visualisation</li>
-                    <li><span>AI Development</span><br>AI Chatbots, Automation Workflows</li>
-                  </ul>
-                </div>
-                <div class="tab-contents" id="experience">
-                  <ul>
-                    <li><span>2024 - Current</span><br>Frontend Developer at Manzeera Solutions, UK</li>
-                    <li><span>2021-2023</span><br>Senior Software Developer at Capgemini, India</li>
-                   
-                  </ul>
-                </div>
-                <div class="tab-contents" id="education">
-                  <ul>
-                    <li><span>2023-2024</span><br>Master in Data Science from Nottingham Trent University, UK</li>
-                    <li><span>2016-2020</span><br>Bachelor of Engineering from Savitribai Phule University, India</li>
-                    
-                  </ul>
-                </div>
-            </div>
+          <div class="about2">
+ <h1 class="sub-title2">About Me</h1>
+<p>
+  I am Saukhyasheel Sardesai, an AI Full Stack Engineer specialising in building intelligent, cloud-native applications and agentic AI systems. I design and deploy end-to-end solutions using Python, FastAPI, LangChain, LangGraph, Azure OpenAI, and modern frontend frameworks like React.
+  <br><br>
+  My work spans conversational agents, workflow automation, RAG pipelines, and integrating LLMs with real-world tools such as Gmail, Redis, WhatsApp, Google Calendar, SharePoint, and enterprise APIs. I have engineered memory-driven chatbots, OTP-authenticated user journeys, multi-agent orchestration systems, and AI-driven assistants for finance, cybersecurity, and operational teams.
+  <br><br>
+  With an MSc in Data Science and prior full-stack experience at Capgemini, I combine strong backend engineering (Python, FastAPI, C#, Node.js), cloud architectures (Azure, GCP), and modern development practices including unit testing, CI/CD, DevOps, and agile delivery. I focus on building scalable, secure, and production-ready AI products that create measurable impact.
+</p>
+
+
+<div class="tab-titles">
+  <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+  <p class="tab-links" onclick="opentab('experience')">Experience</p>
+  <p class="tab-links" onclick="opentab('education')">Education</p>
+</div>
+
+<div class="tab-contents active-tab" id="skills">
+  <ul>
+    <li><span>AI & LLM Engineering</span><br>LangChain, LangGraph, Prompt Engineering, RAG, Agentic AI, NLP</li>
+    <li><span>Chatbot & Agent Development</span><br>WhatsApp, Telegram, Web Chat UI, Multi-Agent Systems, Memory-based Agents, Agentic Mesh Architecture</li>
+    <li><span>Python Backend Engineering</span><br>FastAPI, Flask, REST APIs, Unit Testing (pytest), API Integrations</li>
+    <li><span>Workflow & Automation</span><br>Azure Function Apps, Logic Apps, n8n, Langflow</li>
+    <li><span>Vector Search & Databases</span><br>Redis, MongoDB Atlas Vector DB, Azure Cognitive Search</li>
+    <li><span>Frontend Development</span><br>ReactJS, AngularJS, HTML/CSS/JS, Responsive UI Design</li>
+    <li><span>Cloud & DevOps</span><br>Azure, GCP, Docker, Kubernetes, CI/CD, Git/GitHub, Cloud-Native Architectures</li>
+  </ul>
+</div>
+
+
+  <div class="tab-contents" id="experience">
+  <ul>
+    <li>
+      <span>2025 - Current</span><br>
+      AI Application Developer — Mitie Plc, UK<br>
+      <small>
+        Building production-grade AI agents, RAG pipelines, workflow automation, 
+        and cloud-native AI solutions using Python, FastAPI, Azure, LangChain, and LangGraph.
+      </small>
+    </li>
+
+     <li>
+      <span>2024 - 2025</span><br>
+      AI Engineer & Automation Developer — Manzeera Solutions, UK<br>
+      <small>
+       Developed AI agents on WhatsApp, automated workflows, and built custom tools for LLM-powered solutions.
+      </small>
+    </li>
+
+    <li>
+      <span>2021 - 2023</span><br>
+      Software Developer — Capgemini, India<br>
+      <small>
+        Developed full-stack solutions with .NET, Azure, React, and AngularJS, 
+        including secure backend APIs and optimized database systems in agile environments.
+      </small>
+    </li>
+  </ul>
+</div>
+
+
+ <div class="tab-contents" id="education">
+  <ul>
+    <li>
+      <span>2023 - 2024</span><br>
+      Master’s in Data Science — Nottingham Trent University, UK<br>
+      <small>Project: Intelligent AI chatbot with vector search, OpenAI LLMs, and FastAPI backend</small>
+    </li>
+
+    <li>
+      <span>2016 - 2020</span><br>
+      Bachelor of Engineering — Electronics & Telecommunication, Pune University, India
+    </li>
+  </ul>
+</div>
+
+</div>
+
         </div>
     </div>
 </div>
 <!-- Services -->
 <div id="services">
   <div class="container">
+    
     <h1 class="sub-title">My Services</h1>
+
+    <!-- AI & Automation Services -->
+    <h3 class="sub-sub-title">AI & Automation</h3>
+
     <div class="services-list">
+
       <div>
-        <i class="fa-solid fa-object-ungroup"></i>
-        <h2>Web Design</h2>
-        <p>Crafting visually appealing, responsive websites tailored to user needs and brand identity.</p>
-        <!-- <a href="#">Learn more</a> -->
+        <i class="fa-solid fa-robot"></i>
+        <h2>AI Chatbot Development</h2>
+        <p>
+          Designing intelligent, memory-enabled chatbots using OpenAI, LangChain, and Redis. 
+          Deploying conversational agents across WhatsApp, Telegram, and custom web chat UIs.
+        </p>
       </div>
+
       <div>
-        <i class="fa-solid fa-laptop-code"></i>
-        <h2>Web APIs</h2>
-        <p>Developing robust and secure RESTful APIs to enable seamless integration between frontend and backend.</p>
-        <!-- <a href="#">Learn more</a> -->
+        <i class="fa-solid fa-diagram-project"></i>
+        <h2>Workflow Automation</h2>
+        <p>
+          Automating business processes with n8n, Gmail API, Google Calendar, and custom tools—reducing manual work and enabling end-to-end automation.
+        </p>
       </div>
+
       <div>
-        <i class="fa-solid fa-brain"></i>
-        <h2>AI Engineering</h2>
-        <p>Designing intelligent systems like chatbots and workflow automation using AI models and natural language processing.</p>
-        <!-- <a href="#">Learn more</a> -->
+        <i class="fa-solid fa-code-branch"></i>
+        <h2>Custom AI Tools & Integrations</h2>
+        <p>
+          Building Python-based tools and API integrations for LLM agents, including vector search, OTP flows, lead capture systems, and real-time data processing.
+        </p>
       </div>
+
       <div>
-        <i class="fa-solid fa-hexagon-nodes"></i>
-        <h2>Data Dashboards</h2>
-        <p>Building interactive dashboards that visualize real-time data and support business decision-making.</p>
-        <!-- <a href="#">Learn more</a> -->
+        <i class="fa-solid fa-chart-line"></i>
+        <h2>AI Analytics Dashboards</h2>
+        <p>
+          Creating interactive dashboards to visualise chatbot performance, user behaviour, and workflow metrics using React and Chart.js.
+        </p>
       </div>
-      
+
     </div>
+
+    <!-- Full-Stack Development Services -->
+    <h3 class="sub-sub-title" style="margin-top: 20px;">Full-Stack Development</h3>
+
+    <div class="services-list">
+
+      <div>
+        <i class="fa-solid fa-gears"></i>
+        <h2>.NET Web API Development</h2>
+        <p>
+          Building secure and scalable REST APIs using ASP.NET, including authentication, token handling, versioning, and enterprise integrations.
+        </p>
+      </div>
+
+      <div>
+        <i class="fa-solid fa-desktop"></i>
+        <h2>Frontend with Angular & React</h2>
+        <p>
+          Developing modern SPAs with reusable components, state management, and responsive layouts using ReactJS and Angular.
+        </p>
+      </div>
+
+      <div>
+        <i class="fa-solid fa-database"></i>
+        <h2>Database Engineering</h2>
+        <p>
+          Designing, optimizing, and maintaining SQL Server databases with stored procedures, indexing, and performance tuning.
+        </p>
+      </div>
+
+      <div>
+        <i class="fa-solid fa-mobile-screen"></i>
+        <h2>Responsive UI Design</h2>
+        <p>
+          Crafting mobile-first, accessible user interfaces with HTML, CSS, and JavaScript—ensuring pixel-perfect performance across devices.
+        </p>
+      </div>
+
+    </div>
+
   </div>
 </div>
+
+
 
  <!-- portfolio -->
   <div id="portfolio">
     <div class="container">
   <h1 class="sub-title">My Work</h1>
   <div class="work-list">
-    <div class="work">
-      <img src="images/Difference-between-Web-Designing-and-Web-Development.png" alt="Web Design Project">
-      <div class="layer">
-        <h3>Recipe Website</h3>
-        <p>Built a responsive web application for managing and sharing recipes using HTML, CSS, and JavaScript. Designed user-friendly interfaces for mobile and desktop.</p>
-        <a href="https://screenrec.com/share/UOv7SaE0Ce" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
-      </div>
+   <div class="work-list">
+  <!-- 1. Cristae WhatsApp Bot -->
+  <div class="work">
+    <img src="images/whtasappagent.png" alt="Cristae WhatsApp Bot">
+    <div class="layer">
+      <h3>WhatsApp AI Assistant</h3>
+      <p>Designed and deployed a WhatsApp-based AI assistant using Azure OpenAI, Gmail, Google Sheets, Redis for chat memory, and MongoDB vector store for document search.</p>
+      <a href="https://github.com/Saukhyasheel" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
     </div>
-    <div class="work">
-      <img src="images/webapi.png" alt="API Project">
-      <div class="layer">
-        <h3>Chatbot Backend</h3>
-        <p>Developed Web API for Chatbot using Python Flask to power an AI chatbot, including endpoints for handling real-time user interactions and message history.</p>
-        <a href="https://github.com/Saukhyasheel/Chatbot1.git" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
-      </div>
+  </div>
+
+  
+  <!-- Finance Assistant Agent -->
+<div class="work">
+  <img src="images/FinanceAssistant.png" alt="Finance Assistant Agent">
+  <div class="layer">
+    <h3>Finance Assistant – Web App Agent</h3>
+    <p>
+      React-based finance assistant integrated with SERP API, Outlook, Calendly, and workflow automation tools. Helps users with financial queries, meeting scheduling, and smart data retrieval.
+    </p>
+    <a href="https://github.com/Saukhyasheel" target="_blank" rel="noopener noreferrer">
+      <i class="fa-solid fa-up-right-from-square"></i>
+    </a>
+  </div>
+</div>
+
+
+  <!-- 3. PropMatch Assistant -->
+  <div class="work">
+    <img src="images/PropertyAgent.png" alt="Propmatch Bot">
+    <div class="layer">
+      <h3>Real Estate Agent</h3>
+      <p>Telegram-based assistant connecting brokers with property developers. Utilizes Google Sheets, SERP API, MongoDB, Google Meet, and LangGraph for smart property matching.</p>
+      <a href="https://github.com/Saukhyasheel" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
     </div>
-    <div class="work">
-      <img src="images/A4.jpeg" alt="Dashboard Project">
-      <div class="layer">
-       <h3>AI Chatbot</h3>
-    <p>Built an AI-powered chatbot integrated with WhatsApp and Azure OpenAI, leveraging Gmail, Google Sheets, Redis for memory, and Notion as a dynamic knowledge base to automate user interactions.</p>
-        <a href="https://github.com/Saukhyasheel/gorqgpt.git" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
-      </div>
+  </div>
+
+  <!-- 4. Gorq API WebAI -->
+  <div class="work">
+    <img src="images/Flask.png" alt="Gorq AI Web API">
+    <div class="layer">
+      <h3>Chatbot backend Web API</h3>
+      <p>Developed a scalable Web API using Python Flask to serve AI requests via Groq LLM. Supports dynamic user prompts, message memory, and integration with React frontends.</p>
+      <a href="https://github.com/Saukhyasheel/Chatbot1" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
     </div>
+  </div>
+
+  <!-- 5. React Chatbot Frontend -->
+  <div class="work">
+    <img src="images/ChatFE.png" alt="Chatbot Frontend React">
+    <div class="layer">
+      <h3>Chatbot Frontend</h3>
+      <p>Created a multi-session chatbot UI using React, supporting dynamic message history and sidebar navigation. Integrated with Flask backend and Groq LLM for real-time conversations.</p>
+      <a href="https://github.com/Saukhyasheel/ChatbotFE.git" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
+    </div>
+  </div>
+
+  <!-- 6. Recipe UI Dashboard -->
+  <div class="work">
+    <img src="images/Recipe.png" alt="Recipe Website UI">
+    <div class="layer">
+      <h3>Recipe Website UI Screens</h3>
+      <p>Designed over 70+ responsive React UI screens for a recipe management platform. Emphasized user experience, dashboard visualization, and real-time interactivity.</p>
+      <a href="https://screenrec.com/share/UOv7SaE0Ce" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square"></i></a>
+    </div>
+  </div>
+
+  <div class="work">
+  <img src="images/AzureIndexManager.png" alt="Azure Smart Index Manager">
+  <div class="layer">
+    <h3>Azure Function App – Smart Index Manager</h3>
+    <p>
+      Built an Azure Function App to automate chunk tracking and selective file deletion in Azure Cognitive Search.  
+      Uses Blob Storage, Table Storage, and LangChain to enable efficient vector index updates without full rebuilds.
+    </p>
+    <a href="https://github.com/Saukhyasheel/IndexManagementFunctionApp" target="_blank" rel="noopener noreferrer">
+      <i class="fa-solid fa-up-right-from-square"></i>
+    </a>
+  </div>
+</div>
+
+<div class="work">
+  <img src="images/azureVSGemini.png" alt="Video Analysis AI Comparison">
+  <div class="layer">
+    <h3>Azure OpenAI vs Google Vertex AI – Video Analysis</h3>
+    <p>
+      Comparative experiment analyzing videos using Azure OpenAI (Whisper + GPT) vs Google Vertex AI Gemini Vision. 
+      Demonstrated strengths of audio-based transcription vs visual multimodal understanding through frame extraction.
+    </p>
+    <a href="https://github.com/Saukhyasheel/GeminiVsAzureOpenAI.git" target="_blank" rel="noopener noreferrer">
+      <i class="fa-solid fa-up-right-from-square"></i>
+    </a>
+  </div>
+</div>
+
+
+</div>
+
+
+
+
   </div>
 
   <a class="btn" href="https://github.com/Saukhyasheel" target="_blank" rel="noopener noreferrer">See more</a>
@@ -173,7 +335,7 @@
 
   </div>
 <!-- Contact -->
- <div id="contact">
+<div id="contact">
   <div class="container">
     <div class="row" style="display: flex; justify-content: space-between;">
       <div class="contact-left" style="flex-basis: 35%;">
@@ -181,70 +343,97 @@
         <p><i class="fa-solid fa-paper-plane" style="margin-right: 5px;"></i>saukhyasardesai@outlook.com</p>
         <p><i class="fa-solid fa-mobile" style="margin-right: 5px;"></i>+44 7384025477 +91 7719956060</p>
         <div class="social-icons">
-<a href="#"><i class="fab fa-facebook"></i></a>
-<a href="#"><i class="fab fa-instagram"></i></a>
-<a href="#"><i class="fab fa-linkedin"></i></a>
-<a href="#"><i class="fab fa-whatsapp"></i></a>
+  <!-- Replace the URLs below with your actual social links -->
+  <!--<a href="https://www.facebook.com/YourProfile" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/YourProfile" target="_blank"><i class="fab fa-instagram"></i></a> -->
+  <a href="https://www.linkedin.com/in/saukhyasheel-sardesai/" target="_blank"><i class="fab fa-linkedin"></i></a>
+  <a href="https://wa.me/447384025477" target="_blank"><i class="fab fa-whatsapp"></i></a>
+</div>
 
-        </div>
       </div>
-      <div class="contact-right" >
-<form>
-  <input type="text" name="Name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-  <button type="submit" class="sbt">Submit</button>
-</form>
 
+      <div class="contact-right">
+        <form id="contactForm">
+          <input type="text" name="Name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
+          <button type="submit" class="sbt">Submit</button>
+        </form>
       </div>
     </div>
-    
   </div>
- </div>
- <footer class="footer">
+</div>
+
+<!-- Include the new EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // Initialize EmailJS with your public key
+  emailjs.init("_CI6p-QxNm6Z13ju3"); // <-- Enter your EmailJS Public Key here
+
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Collect form data
+    const formData = {
+      from_name: form.Name.value,
+      from_email: form.email.value,
+      message: form.Message.value
+    };
+
+    // Send email using EmailJS
+    emailjs.send("service_m20wnqm", "template_me5xgj5", formData) 
+    // <-- Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with your EmailJS service and template IDs
+      .then(function(response) {
+        alert("Message sent successfully! I will get back to you soon.");
+        form.reset();
+      }, function(error) {
+        alert("Oops! Something went wrong. Please try again later.");
+        console.error("EmailJS Error:", error);
+      });
+  });
+</script>
+
+<footer class="footer">
   <div class="copyright">
     <p>&copy; <span id="year"></span> Saukhya. All rights reserved.</p>
   </div>
 </footer>
 
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-  <script>
-      var typed = new Typed('#element', {
-        strings: [ 'Full Stack Developer.','Web Designer.', 'AI Developer','Data Science Graduate.'],
-        typeSpeed: 80,
-      });
-    </script>
-    <script>
-      var tablinks = document.getElementsByClassName("tab-links")
-      var tabcontents = document.getElementsByClassName("tab-contents")
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+  var typed = new Typed('#element', {
+    strings: [ 'Full Stack Developer.', 'Web Designer.', 'Data Science Graduate.', 'Cloud-Native Engineer.', 'AI Application Developer.'],
+    typeSpeed: 80,
+  });
+</script>
 
-      function opentab(tabname){
-        for(tablink of tablinks){
-          tablink.classList.remove("active-link");
-        }
-        for(tabcontent of tabcontents){
-          tabcontent.classList.remove("active-tab");
-        }
-        event.currentTarget.classList.add("active-link");
-        document.getElementById(tabname).classList.add("active-tab");
-      }
-    </script>
-     <!-- <script>const hamburger = document.getElementById("hamburger");
-      const sidebar = document.getElementById("sidebar");
-      const content = document.querySelector(".content");
-      
-      hamburger.addEventListener("click", () => {
-          sidebar.classList.toggle("open");
-          content.classList.toggle("sidebar-hidden");
-      });</script> -->
-      <script>
-        const menuToggle = document.querySelector(".menu-toggle");
-        const navLinks = document.querySelector(".nav-links");
-      
-        menuToggle.addEventListener("click", () => {
-          navLinks.classList.toggle("active");
-        });
-      </script>
+<script>
+  var tablinks = document.getElementsByClassName("tab-links")
+  var tabcontents = document.getElementsByClassName("tab-contents")
+
+  function opentab(tabname){
+    for(tablink of tablinks){
+      tablink.classList.remove("active-link");
+    }
+    for(tabcontent of tabcontents){
+      tabcontent.classList.remove("active-tab");
+    }
+    event.currentTarget.classList.add("active-link");
+    document.getElementById(tabname).classList.add("active-tab");
+  }
+</script>
+
+<script>
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+</script>
+
       
 </body>
 </html>
