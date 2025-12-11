@@ -94,19 +94,20 @@ body {
 
     /* about */
     #about {
-        padding: 80px 0;
+        padding: 0px 0;
     }
     
     .row {
         display: flex;
         justify-content: space-between;
-        align-items: center; /* Align image and text in the center */
+        align-items: flex-start; /* Align image and text in the center */
         flex-wrap: wrap;
     }
     
     .about1 {
         flex-basis: 35%;
-        max-width: 350px; /* Ensure image container doesn't stretch */
+        max-width: 450px; /* Ensure image container doesn't stretch */
+        padding-top: 10px;
     }
     
     .about1 img {
@@ -115,12 +116,32 @@ body {
         border-radius: 10px; /* Optional: rounded corners */
     }
     
+    .sub-sub-title{
+        margin-top: 20px;
+    }
+
     .about2 {
         flex-basis: 60%;
         text-align: left;
         font-size: 18px;
         line-height: 1.5;
     }
+
+    .download-btn {
+    text-align: left;
+    display: flex;
+    align-content: flex-start;
+    margin-top: -80px !important;
+}
+@media (max-width: 768px) {
+    .download-btn {
+        text-align: left;
+    display: flex;
+    align-content: flex-start;
+    margin-top: 0px !important; 
+    }
+}
+
 .sub-title{
     /* font-size: 30px; */
     font-weight: bold;
@@ -580,6 +601,7 @@ form input, form textarea{
         flex-basis: 100%;
         max-width: 350px; /* Ensure image container doesn't stretch */
         margin-bottom: 3%;
+        padding-top: 0px;
     }
     
     .about1 img {
