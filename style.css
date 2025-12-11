@@ -140,6 +140,10 @@ body {
     align-content: flex-start;
     margin-top: 0px !important; 
     }
+
+     .sub-sub-title{
+        margin-left: 20px;
+    }
 }
 
 .sub-title{
@@ -583,7 +587,7 @@ form input, form textarea{
     }
 
     .work-list{
-       margin-left: 4%;
+       margin-left: 2%;
        margin-right: 2%;
     }
     .contact-right{
