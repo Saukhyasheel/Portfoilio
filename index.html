@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saukhyasheel Sardesai — AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════ */
+    :root {
+      --bg:        #080c10;
+      --surface:   #0e1318;
+      --surface2:  #131b22;
+      --border:    #1e2d3d;
+      --accent:    #00e5ff;
+      --accent2:   #7b61ff;
+      --accent3:   #39ff9b;
+      --text:      #cdd9e5;
+      --text-dim:  #637589;
+      --text-head: #e6edf3;
+      --red:       #ff5c7c;
+      --mono:      'DM Mono', monospace;
+      --sans:      'Instrument Sans', sans-serif;
+      --display:   'Syne', sans-serif;
+      --radius:    12px;
+      --glow:      0 0 40px rgba(0,229,255,0.10);
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* ═══════════════════════════════════════════
+       NOISE OVERLAY
+    ═══════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ═══════════════════════════════════════════
+       LAYOUT HELPERS
+    ═══════════════════════════════════════════ */
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::before {
+      content: '//';
+      color: var(--text-dim);
+    }
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--text-head);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      color: var(--text-dim);
+      max-width: 560px;
+      font-size: 15px;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 18px 0;
+      transition: background 0.3s, border-bottom 0.3s;
+    }
+    #navbar.scrolled {
+      background: rgba(8,12,16,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    #navbar .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--text-dim); }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 18px;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      color: var(--accent);
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--bg); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8,12,16,0.97);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-head);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 28px;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 60% 40%, black 20%, transparent 70%);
+    }
+    .hero-glow {
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute;
+      bottom: 0;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(123,97,255,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.25);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      background: rgba(0,229,255,0.04);
+    }
+    .hero-tag .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent3);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    .hero-name {
+      font-family: var(--display);
+      font-size: clamp(42px, 7vw, 88px);
+      font-weight: 800;
+      color: var(--text-head);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .hero-name .accent { color: var(--accent); }
+    .hero-typed-wrap {
+      font-family: var(--mono);
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: var(--text-dim);
+      margin-bottom: 28px;
+      min-height: 34px;
+    }
+    .hero-typed-wrap #typed-text { color: var(--accent2); }
+    .hero-typed-wrap .typed-cursor { color: var(--accent); }
+    .hero-bio {
+      font-size: 16px;
+      color: var(--text-dim);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: var(--radius);
+      font-weight: 500;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 14px 28px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+      flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-num {
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-head);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+    .stat-num .unit { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════ */
+    #about {
+      padding: 100px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .about-photo-wrap {
+      position: relative;
+    }
+    .about-photo-frame {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .about-photo-frame img {
+      width: 100%;
+      filter: grayscale(20%) contrast(1.05);
+      transition: filter 0.4s;
+    }
+    .about-photo-frame:hover img { filter: none; }
+    .about-photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,229,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .about-tag-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .tech-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-dim);
+      background: var(--surface2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tech-tag:hover { border-color: var(--accent); color: var(--accent); }
+    .about-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin: 28px 0 24px;
+    }
+    .tab-btn {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 10px 20px;
+      color: var(--text-dim);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .tab-panel ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .tab-panel ul li {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      transition: border-color 0.2s;
+    }
+    .tab-panel ul li:hover { border-color: var(--accent); }
+    .tab-panel ul li .li-head {
+      font-size: 14px;
+      color: var(--text-head);
+      font-weight: 500;
+    }
+    .tab-panel ul li .li-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+    }
+    .tab-panel ul li .li-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SKILLS RIBBON
+    ═══════════════════════════════════════════ */
+    #skills-ribbon {
+      padding: 60px 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .ribbon-track {
+      display: flex;
+      gap: 40px;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .ribbon-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-dim);
+      white-space: nowrap;
+      padding: 8px 20px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: var(--surface2);
+    }
+    .ribbon-item i { color: var(--accent); font-size: 14px; }
+
+    /* ═══════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════ */
+    #services {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+    .services-header { margin-bottom: 56px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover {
+      border-color: rgba(0,229,255,0.3);
+      transform: translateY(-4px);
+      background: var(--surface2);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 10px;
+      font-size: 20px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .service-card h3 {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .service-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 100px;
+      background: rgba(123,97,255,0.1);
+      border: 1px solid rgba(123,97,255,0.2);
+      color: var(--accent2);
+    }
+
+    /* ═══════════════════════════════════════════
+       PROJECTS
+    ═══════════════════════════════════════════ */
+    #projects {
+      padding: 100px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+    }
+    .projects-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .projects-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 7px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-dim);
+      cursor: pointer;
+      background: none;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,229,255,0.06);
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      border-color: rgba(0,229,255,0.3);
+      transform: translateY(-4px);
+    }
+    .project-card[data-hidden="true"] { display: none; }
+    .project-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface2);
+    }
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .project-card:hover .project-img img { transform: scale(1.06); }
+    .project-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: var(--border);
+    }
+    .project-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: rgba(8,12,16,0.85);
+      border: 1px solid var(--border);
+      color: var(--accent3);
+    }
+    .project-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-category {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .project-title {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-head);
+      margin-bottom: 10px;
+    }
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .stack-chip {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 100px;
+      background: rgba(0,229,255,0.06);
+      border: 1px solid rgba(0,229,255,0.14);
+      color: var(--text-dim);
+    }
+    .project-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .proj-link {
+      font-family: var(--mono);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .proj-link:hover { color: var(--accent); border-color: var(--accent); }
+    .proj-link.primary { color: var(--accent); border-color: rgba(0,229,255,0.3); }
+    .see-more-wrap { text-align: center; margin-top: 48px; }
+
+    /* ═══════════════════════════════════════════
+       BLOG  — easy to add new posts
+    ═══════════════════════════════════════════ */
+    #blog {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .blog-card:hover { border-color: rgba(123,97,255,0.4); transform: translateY(-3px); }
+    .blog-meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .blog-meta .tag {
+      color: var(--accent2);
+      padding: 2px 8px;
+      border: 1px solid rgba(123,97,255,0.3);
+      border-radius: 100px;
+    }
+    .blog-title {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-head);
+      line-height: 1.4;
+    }
+    .blog-excerpt { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+    .blog-read {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      transition: gap 0.2s;
+    }
+    .blog-card:hover .blog-read { gap: 10px; }
+
+    /* ═══════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════ */
+    #contact {
+      padding: 100px 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      margin-top: 56px;
+      align-items: start;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface2);
+      transition: border-color 0.2s;
+    }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-icon {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,229,255,0.08);
+      border-radius: 8px;
+      font-size: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .contact-item-text { display: flex; flex-direction: column; }
+    .contact-item-label { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; }
+    .contact-item-val { font-size: 14px; color: var(--text-head); margin-top: 2px; }
+    .socials { display: flex; gap: 12px; flex-wrap: wrap; }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-dim);
+      transition: all 0.2s;
+    }
+    .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: var(--text-head);
+      font-family: var(--sans);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--text-dim); }
+    .contact-form textarea { resize: vertical; min-height: 140px; }
+    .form-status {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 10px 16px;
+      border-radius: 6px;
+      display: none;
+    }
+    .form-status.success { background: rgba(57,255,155,0.08); color: var(--accent3); display: block; border: 1px solid rgba(57,255,155,0.2); }
+    .form-status.error { background: rgba(255,92,124,0.08); color: var(--red); display: block; border: 1px solid rgba(255,92,124,0.2); }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .footer-right {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .footer-right a { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════
+       SCROLL ANIMATIONS
+    ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { gap: 28px; }
+      .form-row { grid-template-columns: 1fr; }
+      .projects-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .wrap { padding: 0 18px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="navbar">
+  <div class="wrap">
+    <div class="nav-logo">saukhya<span>.dev</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">about</a></li>
+      <li><a href="#services">services</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#blog">blog</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+    <a href="Saukhyasheel_Sardesai.pdf" download class="nav-cta">Download CV</a>
+    <div class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <span class="mobile-close" id="mobile-close"><i class="fa-solid fa-xmark"></i></span>
+  <a href="#about" class="mobile-link">about</a>
+  <a href="#services" class="mobile-link">services</a>
+  <a href="#projects" class="mobile-link">projects</a>
+  <a href="#blog" class="mobile-link">blog</a>
+  <a href="#contact" class="mobile-link">contact</a>
+  <a href="Saukhyasheel_Sardesai.pdf" download class="btn-primary" style="margin-top:8px;">Download CV</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      Available for new opportunities · UK, Europe, UAE and India
+    </div>
+    <h1 class="hero-name">Saukhyasheel<br><span class="accent">Sardesai</span></h1>
+    <div class="hero-typed-wrap">
+      I build <span id="typed-text"></span>
+    </div>
+    <p class="hero-bio">
+      AI Full Stack Engineer specialising in production-grade Agentic AI systems, RAG pipelines, and multi-channel automation. Currently at Mitie (UK), shipping AI that replaces manual workflows at scale.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary"><i class="fa-solid fa-bolt"></i> View my work</a>
+      <a href="#contact" class="btn-outline"><i class="fa-regular fa-envelope"></i> Get in touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">4<span class="unit">+</span></span>
+        <span class="stat-label">years experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">50<span class="unit">+</span></span>
+        <span class="stat-label">staff automated</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">30<span class="unit">%</span></span>
+        <span class="stat-label">email load reduction</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">16k<span class="unit">+</span></span>
+        <span class="stat-label">concurrent users served</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-label">about me</div>
+    <h2 class="section-title">Engineer. Builder.<br>AI systems architect.</h2>
+    <div class="about-grid">
+
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo-frame">
+          <!-- Replace src with your actual photo path -->
+          <img src="images/Photo.jpeg" alt="Saukhyasheel Sardesai" onerror="this.style.display='none'; this.parentElement.style.minHeight='340px'; this.parentElement.style.background='var(--surface2)';" />
+        </div>
+        <div class="about-tag-bar">
+          <span class="tech-tag">LangChain</span>
+          <span class="tech-tag">LangGraph</span>
+          <span class="tech-tag">Azure OpenAI</span>
+          <span class="tech-tag">RAG</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">n8n</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Node.js</span>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.15s">
+        <p style="font-size:15px; color:var(--text-dim); line-height:1.85; margin-bottom:18px;">
+          I am Saukhyasheel Sardesai — an AI Full Stack Engineer with 4+ years of experience delivering production software, with a deep specialism in Generative AI, LLMs, and agentic systems over the last two years.
+        </p>
+        <p style="font-size:15px; color:var(--text-dim); line-height:1.85; margin-bottom:18px;">
+          At Mitie (UK) I've built agents like ESME which replaced a 50+ person manual support team. DORIS, a workplace helpdesk email agent with a RAG pipeline integrating SharePoint, Azure Cognitive Search, and Azure blob storage. I combine strong backend engineering (Python, FastAPI, C#, Node.js) with cloud-native architectures on Azure and GCP.
+        </p>
+        <p style="font-size:15px; color:var(--text-dim); line-height:1.85;">
+          Holding an MSc in Data Science degree from Nottingham Trent University. Right to Work in the UK (Graduate Route visa, valid to Jan 2027).
+        </p>
+
+        <div class="about-tabs">
+          <button class="tab-btn active" onclick="switchTab(this, 'tab-skills')">Skills</button>
+          <button class="tab-btn" onclick="switchTab(this, 'tab-experience')">Experience</button>
+          <button class="tab-btn" onclick="switchTab(this, 'tab-education')">Education</button>
+        </div>
+
+        <div class="tab-panel active" id="tab-skills">
+          <ul>
+            <li>
+              <span class="li-sub">AI & LLM Engineering</span>
+              <span class="li-desc">LangChain · LangGraph · Prompt Engineering · RAG · Agentic AI · Multi-agent Systems · LLM Evaluation · Embeddings · Vector Databases</span>
+            </li>
+            <li>
+              <span class="li-sub">Cloud & MLOps</span>
+              <span class="li-desc">Azure (OpenAI · AI Foundry · Cognitive Search · Logic Apps · Function Apps) · AWS · GCP · MLOps · Docker · Kubernetes · CI/CD · Terraform</span>
+            </li>
+            <li>
+              <span class="li-sub">Backend & APIs</span>
+              <span class="li-desc">Python · FastAPI · Node.js · C#/.NET · RESTful APIs · A2A Protocol · MCP · SharePoint Integration · Microsoft Graph API</span>
+            </li>
+            <li>
+              <span class="li-sub">Automation & Integration</span>
+              <span class="li-desc">n8n · Power Automate · WhatsApp Business API · Telegram · Instagram API · Gmail API · template.io · Airtable</span>
+            </li>
+            <li>
+              <span class="li-sub">Frontend</span>
+              <span class="li-desc">React.js · Angular · TypeScript · HTML/CSS</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="tab-experience">
+          <ul>
+            <!-- ═══ ADD NEW JOBS HERE ═══ -->
+            <li>
+              <span class="li-sub">Aug 2025 – Present</span>
+              <span class="li-head">AI Application Developer — Mitie Plc, London UK</span>
+              <span class="li-desc">Building production-grade AI agents (ESME, DORIS), RAG pipelines, multi-agent orchestration meshes, and finance automation agents using Azure OpenAI, LangChain, and LangGraph.</span>
+            </li>
+            <li>
+              <span class="li-sub">Aug 2024 – Jul 2025</span>
+              <span class="li-head">AI Automation Engineer — Manzeera Technologies, Bracknell UK</span>
+              <span class="li-desc">Built AI agents on WhatsApp, Instagram, Telegram, and Gmail using n8n. Delivered real estate, quote-generation, investment advisory, and helpdesk agents for multiple clients.</span>
+            </li>
+            <li>
+              <span class="li-sub">Jun 2021 – Sep 2023</span>
+              <span class="li-head">Software Developer — Capgemini Technology Services, India</span>
+              <span class="li-desc">Designed secure .NET APIs on Azure serving 16,000+ concurrent users, and built React/AngularJS frontends with CI/CD pipelines across enterprise client projects.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="tab-education">
+          <ul>
+            <!-- ═══ ADD NEW DEGREES HERE ═══ -->
+            <li>
+              <span class="li-sub">Oct 2023 – Aug 2024</span>
+              <span class="li-head">MSc Data Science — Nottingham Trent University, UK</span>
+              <span class="li-desc">Big Data, AI, Machine Learning, Data Visualisation, NLP. Dissertation: Android app for automatic location detection and live notifications.</span>
+            </li>
+            <li>
+              <span class="li-sub">Aug 2016 – Nov 2020</span>
+              <span class="li-head">BEng Electronics & Telecommunication Engineering — Pune University, India</span>
+              <span class="li-desc">Electronics, signal processing, embedded systems, and programming fundamentals.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SKILLS RIBBON ═══════════ -->
+<div id="skills-ribbon">
+  <div class="ribbon-track" id="ribbon-track">
+    <!-- duplicated for seamless loop -->
+  </div>
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section id="services">
+  <div class="wrap">
+    <div class="services-header reveal">
+      <div class="section-label">what I offer</div>
+      <h2 class="section-title">Services</h2>
+      <p class="section-desc">From low-code automation to production agentic systems — I design and ship AI that creates measurable business impact.</p>
+    </div>
+    <div class="services-grid">
+      <!-- ═══ ADD NEW SERVICES HERE ═══ -->
+
+      <div class="service-card reveal">
+        <div class="service-icon"><i class="fa-solid fa-robot"></i></div>
+        <h3>AI Agent Development</h3>
+        <p>End-to-end agentic AI systems using LangChain, LangGraph, and Azure OpenAI. From single-purpose helpdesk bots to multi-agent orchestration meshes communicating over A2A protocol.</p>
+        <div class="service-tags">
+          <span class="service-tag">LangChain</span>
+          <span class="service-tag">LangGraph</span>
+          <span class="service-tag">Azure OpenAI</span>
+          <span class="service-tag">A2A Protocol</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:0.1s">
+        <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h3>RAG Pipelines & Vector Search</h3>
+        <p>Retrieval-Augmented Generation pipelines connecting your documents, SharePoint, or knowledge bases to LLMs — with Azure Cognitive Search, MongoDB, and optimised embedding strategies.</p>
+        <div class="service-tags">
+          <span class="service-tag">RAG</span>
+          <span class="service-tag">Azure AI Search</span>
+          <span class="service-tag">MongoDB</span>
+          <span class="service-tag">Embeddings</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:0.2s">
+        <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <h3>Workflow Automation</h3>
+        <p>Business process automation using Azure Logic Apps, Function Apps and n8n integrating WhatsApp Business, Gmail, Telegram, Instagram, and enterprise APIs to eliminate manual work.</p>
+        <div class="service-tags">
+          <span class="service-tag">Logic Apps</span>
+          <span class="service-tag">n8n</span>
+          <span class="service-tag">WhatsApp API</span>
+          <span class="service-tag">Gmail API</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:0.3s">
+        <div class="service-icon"><i class="fa-solid fa-cloud"></i></div>
+        <h3>Cloud-Native AI Architecture</h3>
+        <p>Designing and deploying scalable AI infrastructure on Azure, AWS, and GCP with MLOps practices, CI/CD pipelines, Docker/Kubernetes, and AI Governance built in from day one.</p>
+        <div class="service-tags">
+          <span class="service-tag">Azure</span>
+          <span class="service-tag">MLOps</span>
+          <span class="service-tag">Docker</span>
+          <span class="service-tag">Kubernetes</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:0.1s">
+        <div class="service-icon"><i class="fa-solid fa-gears"></i></div>
+        <h3>Full Stack AI Products</h3>
+        <p>Complete product development from FastAPI/Node.js backend through to React frontend production-ready, tested, and deployed with proper CI/CD and observability.</p>
+        <div class="service-tags">
+          <span class="service-tag">FastAPI</span>
+          <span class="service-tag">Node.js</span>
+          <span class="service-tag">React</span>
+          <span class="service-tag">TypeScript</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal" style="transition-delay:0.2s">
+        <div class="service-icon"><i class="fa-solid fa-comments-dollar"></i></div>
+        <h3>Domain-Specific AI Agents</h3>
+        <p>Bespoke agents for finance (email classification, policy retrieval), real estate (tenant matching), investment advisory, and cybersecurity trained on your data, integrated into your workflows.</p>
+        <div class="service-tags">
+          <span class="service-tag">Finance AI</span>
+          <span class="service-tag">Real Estate AI</span>
+          <span class="service-tag">Custom LLMs</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROJECTS ═══════════ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="projects-header reveal">
+      <div>
+        <div class="section-label">portfolio</div>
+        <h2 class="section-title">Projects</h2>
+      </div>
+      <div class="projects-filter">
+        <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+        <button class="filter-btn" onclick="filterProjects('agent', this)">Agents</button>
+        <button class="filter-btn" onclick="filterProjects('rag', this)">RAG</button>
+        <button class="filter-btn" onclick="filterProjects('automation', this)">Automation</button>
+        <button class="filter-btn" onclick="filterProjects('fullstack', this)">Full Stack</button>
+      </div>
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+      <!-- ═══════════════════════════════════════
+           TO ADD A NEW PROJECT: copy a .project-card
+           block and fill in the details.
+           data-tags: comma-separated from: agent, rag, automation, fullstack
+      ═══════════════════════════════════════ -->
+
+      <div class="project-card reveal" data-tags="agent,rag">
+        <div class="project-img">
+          <img src="images/ESME.png" alt="ESME Agent" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-solid fa-robot"></i></div>
+          <span class="project-badge">Production · Mitie</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Agent · RAG</div>
+          <div class="project-title">ESME — AI Service Request Agent</div>
+          <p class="project-desc">Autonomous agent handling all inbound service requests and staff FAQs using Azure OpenAI, LangChain, LangGraph and RAG eliminating a manual support team of 50+ people at Mitie.</p>
+          <div class="project-stack">
+            <span class="stack-chip">Azure OpenAI</span>
+            <span class="stack-chip">LangChain</span>
+            <span class="stack-chip">Node.js</span>
+            <span class="stack-chip">React</span>
+            <span class="stack-chip">RAG</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Saukhyasheel" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-tags="agent,rag" style="transition-delay:0.1s">
+        <div class="project-img">
+          <img src="images/Agentic Mesh.png" alt="Agentic Mesh" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-solid fa-diagram-project"></i></div>
+          <span class="project-badge">Production · Mitie</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Multi-agent · Architecture</div>
+          <div class="project-title">Agentic Mesh Orchestration Layer</div>
+          <p class="project-desc">Centralised Agent Registry on Azure Tables enabling agent discovery and autonomous collaboration using A2A protocol no requests dropped, no human escalation required.</p>
+          <div class="project-stack">
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">Azure Functions</span>
+            <span class="stack-chip">LangChain</span>
+            <span class="stack-chip">A2A Protocol</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Saukhyasheel" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-tags="automation" style="transition-delay:0.2s">
+        <div class="project-img">
+          <img src="images/PropertyAgent.png" alt="Real Estate Agent" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-solid fa-building"></i></div>
+          <span class="project-badge">Production · Manzeera</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Automation · Agent</div>
+          <div class="project-title">Real Estate AI Agent</div>
+          <p class="project-desc">Captures tenant information and property details into Airtable, then uses LLM reasoning to match and suggest suitable properties deployed via WhatsApp Business and Telegram.</p>
+          <div class="project-stack">
+            <span class="stack-chip">n8n</span>
+            <span class="stack-chip">WhatsApp API</span>
+            <span class="stack-chip">Airtable</span>
+            <span class="stack-chip">LLM</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Saukhyasheel" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-tags="rag,automation">
+        <div class="project-img">
+          <img src="images/AzureIndexManager.png" alt="Azure Smart Index Manager" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-brands fa-microsoft"></i></div>
+          <span class="project-badge">Production · Mitie</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">RAG · Azure</div>
+          <div class="project-title">Azure Smart Index Manager</div>
+          <p class="project-desc">Azure Function App automating chunk tracking and selective file deletion in Azure Cognitive Search using Blob Storage, Table Storage, and LangChain efficient vector index updates without full rebuilds and specific chunk deletion.</p>
+          <div class="project-stack">
+            <span class="stack-chip">Azure Functions</span>
+            <span class="stack-chip">Cognitive Search</span>
+            <span class="stack-chip">LangChain</span>
+            <span class="stack-chip">Blob Storage</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Saukhyasheel/IndexManagementFunctionApp" target="_blank" class="proj-link primary"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-tags="agent" style="transition-delay:0.1s">
+        <div class="project-img">
+          <img src="images/FinanceAssistant.png" alt="Finance Assistant" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-solid fa-chart-line"></i></div>
+          <span class="project-badge">Client Project</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Agent · Finance</div>
+          <div class="project-title">Finance Helpdesk Automation Agent</div>
+          <p class="project-desc">Classifies incoming emails, retrieves policy documents via Azure AI Search, and drafts responses reducing the team's manual email-handling load by ~30%.</p>
+          <div class="project-stack">
+            <span class="stack-chip">Azure AI Search</span>
+            <span class="stack-chip">Azure OpenAI</span>
+            <span class="stack-chip">React</span>
+            <span class="stack-chip">SERP API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Saukhyasheel" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-tags="fullstack" style="transition-delay:0.2s">
+        <div class="project-img">
+          <img src="images/azureVSGemini.png" alt="Azure vs Gemini" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-solid fa-flask"></i></div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Research · Multimodal</div>
+          <div class="project-title">Azure OpenAI vs Google Vertex AI — Video Analysis</div>
+          <p class="project-desc">Comparative experiment analysing videos using Azure OpenAI (Whisper + GPT) vs Google Vertex AI Gemini Vision — demonstrating strengths of audio-based transcription vs visual multimodal reasoning.</p>
+          <div class="project-stack">
+            <span class="stack-chip">Azure OpenAI</span>
+            <span class="stack-chip">Gemini Vision</span>
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">Whisper</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Saukhyasheel/GeminiVsAzureOpenAI.git" target="_blank" class="proj-link primary"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-tags="agent">
+        <div class="project-img">
+          <img src="images/InstagramReel.png" alt="Instagram Reel Decoder" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-brands fa-instagram"></i></div>
+          <span class="project-badge">Client Project</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Agent · Multimodal</div>
+          <div class="project-title">Instagram Reel Decoder — AI Travel Planner</div>
+          <p class="project-desc">Multimodal AI agent that analyses an Instagram Reel, extracts locations using Gemini Pro Vision, and generates a tailored budget travel itinerary — publicly deployed FastAPI service.</p>
+          <div class="project-stack">
+            <span class="stack-chip">Python</span>
+            <span class="stack-chip">FastAPI</span>
+            <span class="stack-chip">Gemini Pro Vision</span>
+            <span class="stack-chip">RAG</span>
+          </div>
+          <div class="project-links">
+            <a href="https://saukhyaofficial.onrender.com" target="_blank" class="proj-link primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
+            <a href="https://github.com/Saukhyasheel" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" data-tags="fullstack" style="transition-delay:0.1s">
+        <div class="project-img">
+          <img src="images/ChatbotUI.png" alt="Chatbot Frontend" onerror="this.style.display='none'" />
+          <div class="project-img-placeholder" style="display:none"><i class="fa-solid fa-comments"></i></div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Full Stack · Frontend</div>
+          <div class="project-title">Multi-session Chatbot UI + Flask Backend</div>
+          <p class="project-desc">Multi-session chatbot frontend built in React with sidebar navigation and dynamic message history, integrated with a Flask backend and Groq LLM for real-time conversations.</p>
+          <div class="project-stack">
+            <span class="stack-chip">React</span>
+            <span class="stack-chip">Flask</span>
+            <span class="stack-chip">Groq LLM</span>
+            <span class="stack-chip">Python</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Saukhyasheel/ChatbotFE.git" target="_blank" class="proj-link primary"><i class="fa-brands fa-github"></i> Code</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="see-more-wrap reveal">
+      <a href="https://github.com/Saukhyasheel" target="_blank" class="btn-outline">
+        <i class="fa-brands fa-github"></i> View all on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BLOG ═══════════ -->
+<section id="blog">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-label">thoughts & writing</div>
+      <h2 class="section-title">Blog</h2>
+      <p class="section-desc">Articles on Agentic AI, RAG, MLOps, and building production LLM systems — coming soon. Follow me on LinkedIn for updates.</p>
+    </div>
+
+    <div class="blog-grid" id="blog-grid">
+      <!-- ═══════════════════════════════════════
+           TO ADD A NEW POST: copy a .blog-card block.
+           Set href to your article URL (Medium, dev.to, LinkedIn etc.)
+      ═══════════════════════════════════════ -->
+
+      <a class="blog-card reveal" href="https://www.linkedin.com/posts/saukhyasheel-sardesai_ai-llm-claude-share-7449073925705150464-LYsd?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADQAAW0BaHbdEdKCTK-dwHmuMhSm2JrGzjY" target="_blank">
+        <div class="blog-meta">
+          <span class="tag">Agentic AI</span>
+          <!-- <span>Coming soon</span> -->
+        </div>
+        <div class="blog-title">Claude-Powered AI Agent with FastAPI & Azure Deployment</div>
+        <div class="blog-excerpt">Designed and built a production-ready AI agent using Claude (Anthropic), FastAPI, and Azure Container Apps. Implemented a full agentic loop with dynamic tool calling, session management, and scalable cloud deployment architecture. Features include calculator and weather tools with an extensible registry for rapid expansion.</div>
+        <div class="blog-read">Read on LinkedIn <i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="blog-card reveal" href="https://www.linkedin.com/posts/saukhyasheel-sardesai_azure-openai-vs-vertex-ai-gemini-vision-ugcPost-7395090739988230144-wjEj?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADQAAW0BaHbdEdKCTK-dwHmuMhSm2JrGzjY" target="_blank" style="transition-delay:0.1s">
+        <div class="blog-meta">
+          <span class="tag">AI Model</span>
+          <!-- <span>Coming soon</span> -->
+        </div>
+        <div class="blog-title">Azure OpenAI vs Google Vertex AI for Video Analysis</div>
+        <div class="blog-excerpt">Conducted a hands-on comparison between Azure OpenAI (Whisper + GPT) and Google Vertex AI Gemini Vision for video analysis workflows. Evaluated how each platform handles speech transcription, visual understanding, and summarisation. Found Azure excels in audio-driven content, while Gemini delivers stronger multimodal insights by analysing scenes, actions, and visual context.</div>
+        <div class="blog-read">Read on LinkedIn <i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+      <a class="blog-card reveal" href="https://www.linkedin.com/posts/saukhyasheel-sardesai_github-saukhyasheelindexmanagementfunctionapp-activity-7379217898092781569-pHx2?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADQAAW0BaHbdEdKCTK-dwHmuMhSm2JrGzjY" target="_blank" style="transition-delay:0.2s">
+        <div class="blog-meta">
+          <span class="tag">Automation</span>
+          <!-- <span>Coming soon</span> -->
+        </div>
+        <div class="blog-title">Azure Function App for Smart Vector Index Management</div>
+        <div class="blog-excerpt">Built an Azure Function App to optimise vector search pipelines with selective chunk-level indexing and deletion. Files from Blob Storage are chunked, vectorised, and stored in Azure Cognitive Search, while chunk mappings are tracked in Azure Table Storage. This enables targeted updates or deletions without rebuilding the full index, creating a faster, scalable, and production-ready search architecture.</div>
+        <div class="blog-read">Read on LinkedIn <i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+
+        <a class="blog-card reveal" href="https://www.linkedin.com/posts/saukhyasheel-sardesai_github-saukhyasheelindexmanagementfunctionapp-activity-7379217898092781569-pHx2?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADQAAW0BaHbdEdKCTK-dwHmuMhSm2JrGzjY" target="_blank" style="transition-delay:0.2s">
+        <div class="blog-meta">
+          <span class="tag">Vector Database</span>
+          <!-- <span>Coming soon</span> -->
+        </div>
+        <div class="blog-title">End-to-End Vector Search Pipeline with Azure & LangChain</div>
+        <div class="blog-excerpt">Built a complete vector search pipeline using Azure Cognitive Search, Azure Blob Storage, Azure OpenAI, and LangChain to enable semantic, context-aware document retrieval. The workflow automates index refresh, document ingestion, embedding generation, and hybrid search to return highly relevant chunks with metadata like file name and chunk ID. Designed for accuracy-critical use cases such as compliance and legal search systems.</div>
+        <div class="blog-read">Read on LinkedIn <i class="fa-solid fa-arrow-right"></i></div>
+      </a>
+        
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-label">get in touch</div>
+      <h2 class="section-title">Let's build something.</h2>
+      <p class="section-desc">Open to AI Engineer roles in the UK. Also available for freelance AI agent builds, RAG pipelines, and automation consultancy.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-regular fa-envelope"></i></div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">EMAIL</span>
+            <span class="contact-item-val">saukhyasardesai@outlook.com</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">PHONE</span>
+            <span class="contact-item-val">+44 7384 025477</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">LOCATION</span>
+            <span class="contact-item-val">London, United Kingdom</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-id-card"></i></div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">RIGHT TO WORK</span>
+            <span class="contact-item-val">Graduate Route Visa · valid Jan 2027</span>
+          </div>
+        </div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/saukhyasheel-sardesai/" target="_blank" class="social-btn">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com/Saukhyasheel" target="_blank" class="social-btn">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a href="https://wa.me/447384025477" target="_blank" class="social-btn">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.15s">
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <input type="text" name="Name" placeholder="Your name" required />
+            <input type="email" name="email" placeholder="Your email" required />
+          </div>
+          <input type="text" name="subject" placeholder="Subject" />
+          <textarea name="Message" rows="5" placeholder="Tell me about your project or role..." required></textarea>
+          <div class="form-status" id="formStatus"></div>
+          <button type="submit" class="btn-primary" style="width:fit-content; border:none; cursor:pointer; font-size:14px;">
+            <i class="fa-solid fa-paper-plane"></i> Send message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="wrap footer-inner">
+    <span class="footer-copy">© <span id="year"></span> Saukhyasheel Sardesai. All rights reserved.</span>
+    <span class="footer-right">Built with ❤ · <a href="https://saukhyaofficial.onrender.com" target="_blank">saukhyaofficial.onrender.com</a></span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
+<script>
+  // ── Typed.js hero ──
+  new Typed('#typed-text', {
+    strings: [
+      'AI agents that scale.',
+      'RAG pipelines that work.',
+      'multi-agent systems.',
+      'agentic automation.',
+      'LLM-powered products.',
+    ],
+    typeSpeed: 60,
+    backSpeed: 35,
+    backDelay: 2200,
+    loop: true,
+  });
+
+  // ── Year ──
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ── Navbar scroll ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── Mobile menu ──
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.add('active');
+  });
+  document.getElementById('mobile-close').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.remove('active');
+  });
+  document.querySelectorAll('.mobile-link').forEach(el => {
+    el.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active'));
+  });
+
+  // ── About tabs ──
+  function switchTab(btn, panelId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(panelId).classList.add('active');
+  }
+
+  // ── Project filter ──
+  function filterProjects(tag, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.project-card').forEach(card => {
+      const tags = card.dataset.tags || '';
+      card.dataset.hidden = (tag !== 'all' && !tags.includes(tag)) ? 'true' : 'false';
+    });
+  }
+
+  // ── Skills ribbon ──
+  const skills = [
+    { icon: 'fa-solid fa-robot', label: 'Agentic AI' },
+    { icon: 'fa-solid fa-database', label: 'RAG Pipelines' },
+    { icon: 'fa-brands fa-python', label: 'Python' },
+    { icon: 'fa-solid fa-cloud', label: 'Azure OpenAI' },
+    { icon: 'fa-solid fa-link', label: 'LangChain' },
+    { icon: 'fa-solid fa-diagram-project', label: 'LangGraph' },
+    { icon: 'fa-solid fa-magnifying-glass', label: 'Vector Search' },
+    { icon: 'fa-solid fa-bolt', label: 'FastAPI' },
+    { icon: 'fa-brands fa-react', label: 'React.js' },
+    { icon: 'fa-solid fa-gears', label: 'n8n Automation' },
+    { icon: 'fa-brands fa-docker', label: 'Docker' },
+    { icon: 'fa-solid fa-server', label: 'MLOps' },
+    { icon: 'fa-solid fa-shield-halved', label: 'AI Governance' },
+    { icon: 'fa-brands fa-node-js', label: 'Node.js' },
+    { icon: 'fa-solid fa-code', label: 'TypeScript' },
+    { icon: 'fa-solid fa-infinity', label: 'CI/CD' },
+  ];
+  const track = document.getElementById('ribbon-track');
+  // duplicate for seamless loop
+  [...skills, ...skills].forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'ribbon-item';
+    el.innerHTML = `<i class="${s.icon}"></i>${s.label}`;
+    track.appendChild(el);
+  });
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── EmailJS Contact Form ──
+  emailjs.init("_CI6p-QxNm6Z13ju3");
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const status = document.getElementById('formStatus');
+    const btn = this.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending…';
+    btn.style.opacity = '0.7';
+    status.className = 'form-status';
+    emailjs.send("service_m20wnqm", "template_me5xgj5", {
+      from_name: this.Name.value,
+      from_email: this.email.value,
+      message: this.Message.value
+    }).then(() => {
+      status.textContent = '✓ Message sent! I\'ll get back to you soon.';
+      status.className = 'form-status success';
+      this.reset();
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send message';
+      btn.style.opacity = '1';
+    }, (err) => {
+      status.textContent = '✗ Something went wrong. Please email me directly.';
+      status.className = 'form-status error';
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send message';
+      btn.style.opacity = '1';
+    });
+  });
+</script>
+
+</body>
+</html>
